@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link href="/static/news/lady.css" type="text/css" rel="stylesheet" />
+</head>
+    <title>{$Think.lang.index_title}</title>
+</head>
+<body>
+
+    {include file="../application/index/view/public/header.html" /}
+    
+    
+    <div class="position margin-top-50">  </div>
+    
+    
+    <div class="container margin-top-50">
+                        
+        <div class="left">
+            {volist name="articleres" id="vo"}
+                    <div class="xnews2">
+                    <div class="pic"><a target="_blank" ><img src="{if condition="$vo['pic'] neq '' "}{$vo.pic}{else /}__PUBLIC__/images/error.png{/if}" alt=""/></a></div>
+                    <div class="dec">
+                    <h3><a target="_blank" href="{:url('index/news_detail',array('arid'=>$vo['id']))}">{$vo.title}</a></h3>
+                    <p>描述：{$vo.desc}</p>
+                    <div class="time">发布时间：{$vo['time']|date="Y-m-d",###}</div>
+                       <div class="time">
+                        <?php
+                        $arr=explode(',',$vo['keywords']);
+                     foreach ($arr as $k=>$v){
+                     echo "<a >$v</a> ";
+                 }
+                        ?>
+                </div>
+                 </div>
+            </div>
+                    
+     {/volist}
+                    
+                    <div class="pages">
+                    <div class="plist" >
+        {$articleres->render()}
+                    </div>
+                    </div>
+        </div>
+        
+    
+    
+    
+                        
+        
+    </div>
+    <div class="container  margin-top-50"></div>
+    {include file="../application/index/view/public/footer.html" /}
+    <!--body end-->
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

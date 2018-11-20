@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+		var user_name="{$result.user_name}"
+		var phone="{$result.phone}";
+		var age="{$result.age}";
+		var profile_info="{$result.profile_info}";
+		var work_history="{$result.work_history}";
+		var role="{$account_role.role}";
+	</script>
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+	<link rel="stylesheet" href="/static/css/account_info_edit.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/account_info_edit.js"></script>
+
+    <title>{$Think.lang.admin_user_account}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;height:800px;">
+
+			<div><h4>{$Think.lang.mmcenter_account_info_tile}</h4></div>
+				<hr/>
+				<div class="row">
+					<form action="/index.php/index/interfacesadmin/update_user_info" enctype="multipart/form-data" method="post" onsubmit="return submit_check();">			
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_name} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="name" type="text" name="name" onchange="check_name();" maxlength="40"/>
+								<span class="name" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_name_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.admin_user_account_role} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><select id="role" name="role">
+								<option value ="0">{$Think.lang.admin_user_account_unkown}</option>
+								<option value ="1">{$Think.lang.admin_user_account_employee}</option>
+								<option value ="2">{$Think.lang.admin_user_account_employer}</option>
+								</select>
+								<span class="role" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_name_error}</span>
+							</p>
+						</div>
+							
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_phone} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="phone" type="text" name="phone" onchange="check_phone();" maxlength="12"/>
+								<span class="phone" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_phone_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_age} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><select id="age" name="age"></select>
+								<span></span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_profile} : 
+							<span style="font-size:small;">{$Think.lang.mmcenter_account_info_profile_maxlen}</span>
+							</p></div>
+						<div class="col-xs-12 col-md-9">
+							<textarea id="profile" name="profile" onchange="check_charnum_profile();"></textarea>
+							<span class="profile" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_profile_maxlen_error}</span></p>
+						</div>
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_work_history} : 
+							<span style="font-size:small;">{$Think.lang.mmcenter_account_info_profile_maxlen}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><textarea id="work_history" type="textarea" name="work_history" onchange="check_charnum_work_history();"></textarea>
+							<span class="work_history" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_profile_maxlen_error}</span>
+							</p>
+						</div>
+						<input type="hidden" id="user_id" name="user_id" value="{$result.user_id}"></input>
+						
+						<div class="col-xs-11 col-md-9" style="text-align:center;"><input type="submit" value='{$Think.lang.button_submit}' /></div>
+					</form>
+				</div>
+		</div>
+
+</div>
+<!--body end-->
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

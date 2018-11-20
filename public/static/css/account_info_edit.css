@@ -1,0 +1,24 @@
+.menu:hover
+{
+	background:#fff;
+	cursor:pointer;
+}
+.menu div
+{
+	margin-top:20px;
+}
+
+hr
+{
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	border: 0;
+	border-top: 1px solid #CDC9C9 !important;
+}
+
+textarea
+{
+	height:150px;
+	width:250px;
+	resize:none;
+}

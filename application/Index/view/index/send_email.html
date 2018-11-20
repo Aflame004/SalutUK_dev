@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var email='{$email}';
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<link rel="stylesheet" href="/static/css/send_mail.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/send_email.js"></script>
+    <title>{$Think.lang.register_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header.html" /}
+<div class="container margin-top-50 register_main">
+	<div class="row" style="margin-top:70px;">
+		<div class="col-xs-2 col-md-4">
+			
+		</div>
+		<div class="col-xs-5 col-md-4" style = "height:450px;margin-top:75px;">
+			<div><h3>{$Think.lang.register_welcome}</h3></div>
+			<form action="/index.php/index/index/register" method="post" onsubmit="return submit_check()">
+				<div class="row">
+					<div class="col-xs-12 col-md-12"><p>{$Think.lang.send_email_tip} : </p></div>
+					<div class="col-xs-12 col-md-12"><p><a href='/index.php/index/index/index'>{$Think.lang.send_email_redirect_to_home}<a/></p></div>
+				<div>
+			</form>
+			</div>
+		</div>
+		</div>
+		<hr/>
+		{include file="../application/index/view/public/footer.html" /}
+	</div>
+</div>
+<!--body end-->
+
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

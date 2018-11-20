@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/admin_admin_group.js"></script>
+    <title>{$Think.lang.admin_group_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;height:800px;">
+			<div class="col-xs-12 col-md-12"><h3>{$Think.lang.admin_group_title}<hr/></h3><button class="admin_add">{$Think.lang.button_add}</button></div>
+			<div class="col-xs-2 col-md-3"><p>{$Think.lang.admin_group_id}</p></div>
+			<div class="col-xs-3 col-md-3"><p>{$Think.lang.admin_group_name}</p></div>
+			<div class="col-xs-3 col-md-3"><p>{$Think.lang.admin_grouop_status}</p></div>
+			<div class="col-xs-3 col-md-3"><p>{$Think.lang.admin_group_operation}</p></div>
+			{foreach $result as $item}
+			<div class="col-xs-2 col-md-3"><p>{$item.group_id}</p></div>
+			<div class="col-xs-3 col-md-3"><p>{$item.group_name}</p></div>
+			<div class="col-xs-3 col-md-3"><p>
+			{if condition="$item.status==1"}
+			{$Think.lang.admin_group_activated}
+			{else if condition="$item.status==0"}
+			{$Think.lang.admin_group_freeze}
+			{/if}
+			</p></div>
+			<div class="col-xs-4 col-md-3">
+				<p>
+					<button class="group_edit" value="{$item.group_id}">{$Think.lang.button_edit}</button>
+					<button class="group_freeze" value="{$item.group_id}">{$Think.lang.button_freeze}</button>
+				</p>
+			</div>
+			{/foreach}
+		</div>
+
+</div>
+<!--body end-->
+<!-- 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="addModalLabel">{$Think.lang.button_add}</h4>
+				</div>
+				<div class="modal-body">
+	
+					<div class="form-group">
+						<label for="admin_group_name">{$Think.lang.admin_group_name}</label>
+						<input id="admin_group_name"type="text" class="form-control">
+					</div>
+					<div class="form-group">
+							<label for="admin_group_name">{$Think.lang.admin_group_item}</label>
+							{foreach group_item as $item}
+							<div>
+								<input class="add_auth" type="checkbox" name="auth_id[]" value="{$item.auth_id}" >{$item.item_name}</input>
+							</div>
+							{/foreach}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+					<button val="" type="button" id="add_btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ></span>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 新增 -->
+<!-- 编辑 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="editModalLabel">{$Think.lang.button_add}</h4>
+				</div>
+				<div class="modal-body">
+	
+					<div class="form-group">
+						<label for="edit_group_name">{$Think.lang.admin_group_name}</label>
+						<input id="edit_group_name" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+							<label for="">{$Think.lang.admin_group_item}</label>
+							{foreach group_item as $item}
+							<div>
+								<input class="edit_auth" type="checkbox" name="edit_auth[]" value="{$item.auth_id}" >{$item.item_name}</input>
+							</div>
+							{/foreach}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+					<button type="button" id="edit_btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ></span>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 编辑 -->
+<!-- 冻结确认 -->  
+<div class="modal fade" id="delcfmModel" val="">  
+	<div class="modal-dialog">  
+	  <div class="modal-content message_align">  
+		<div class="modal-header">  
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+		  <h4 class="modal-title">提示信息</h4>  
+		</div>  
+		<div class="modal-body">  
+		  <p>您确认要冻结吗？</p>  
+		</div>  
+		<div class="modal-footer">  
+		   <input type="hidden" id="url"/>  
+		   <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		   <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>  
+		</div>  
+	  </div><!-- /.modal-content -->  
+	</div><!-- /.modal-dialog -->  
+ </div><!-- /.modal -->  
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

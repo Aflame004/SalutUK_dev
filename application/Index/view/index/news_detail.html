@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+    <!-- <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css"> -->
+    <link href="/static/news/lady.css" type="text/css" rel="stylesheet" />
+    <title>{$Think.lang.index_title}</title>
+</head>
+<body>
+
+   
+    {include file="../application/index/view/public/header.html" /}
+<div class="position"><a href="{:url('index/index')}">主页</a> > <a href="{:url('cate/index',array('cateid'=>$cates['id']))}">{$cates.catename}</a> >  </div>
+
+
+    <div class="overall">
+        <div class="left">
+            <div class="scrap">
+                <h1>{$articles.title}</h1>
+                <div class="spread">
+                    <span class="writor">发布时间：{$articles['time']|date="Y-m-d",###}</span>
+                    <span class="writor">编辑：{$articles.author}</span>
+                   
+                       <span class="writor">标签：
+                            <?php
+                $arr=explode(',',$articles['keywords']);
+             foreach ($arr as $k=>$v){
+             echo "<a >$v</a> ";
+         }
+                ?></span> 
+                <span class="writor">热度：{$articles.click}</span>
+                </div>
+            </div>
+           
+
+            <div class="takeaway">
+                <span class="btn2 arr-left"></span>
+                <p class="jjxq"><h3 style="color: red">摘要：</h3>{$articles.desc}
+         </p>
+                <span class="btn2 arr-right"></span>
+            </div>
+
+
+            <div class="substance">
+          <img src="{if condition="$articles['pic'] neq '' "}{$articles.pic}{else /}__PUBLIC__/images/error.png{/if}" alt="" />
+          {$articles.content}
+            <div class="biaoqian">
+               
+            </div>
+</div> 
+
+     
+
+
+
+</div>
+<div class="container  margin-top-50"></div>
+
+{include file="../application/index/view/public/footer.html" /}
+
+    <!--body end-->
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

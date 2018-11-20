@@ -1,0 +1,17 @@
+form div p span
+{
+	color:red;
+}
+
+hr
+{
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	border: 0;
+	border-top: 1px solid #CDC9C9 !important;
+}
+
+.input_style
+{
+	width:250px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/company_verify.js"></script>
+    <title>{$Think.lang.admin_login_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;height:800px;">
+			<div class="col-xs-12 col-md-12"><h3>{$Think.lang.admin_company_list}<hr/></h3></div>
+			<div class="col-xs-2 col-md-2"><p>{$Think.lang.mmcenter_current_apply_date}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.admin_company_user_name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.admin_company_name}</p></div>
+			<div class="col-xs-4 col-md-6"><p>{$Think.lang.admin_company_phone}</p></div>
+			{foreach $result as $item}
+			<div class="col-xs-2 col-md-2"><p>{$item.apply_time}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.user_name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.company_name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.phone}</p></div>
+			<div class="col-xs-4 col-md-4"><p><button class="btn_detail" value="{$item.company_id}">{$Think.lang.admin_company_detail}</button></p></div>
+			{/foreach}
+		</div>
+
+</div>
+<!--body end-->
+
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

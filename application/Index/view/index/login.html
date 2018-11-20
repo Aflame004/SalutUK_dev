@@ -1,0 +1,56 @@
+<?php
+	use Hr_const\Hr_const;
+	$wechat_appid=Hr_const::wechat_appid;
+	$fb_appid=Hr_const::fb_appid;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/login.js"></script>
+    <title>{$Think.lang.login_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;">
+		<div class="col-xs-2 col-md-4">
+			
+		</div>
+		<div class="col-xs-5 col-md-4" style = "height:450px;margin-top:75px;">
+			<div><h3>{$Think.lang.login_welcome}</h3></div>
+				<div class="row">
+					<div class="col-xs-12 col-md-3"><p>{$Think.lang.login_email} : </p></div>
+					<div class="col-xs-12 col-md-9"><p><input id="email" type="text" name="email"/></p></div>
+					<div class="col-xs-12 col-md-3"><p>{$Think.lang.login_password} : </p></div>
+					<div class="col-xs-12 col-md-9"><p><input id="password" type="password" name="password"/></p></div>
+					<div class="col-xs-12 col-md-9" id="login_error" style="display:none;"><p><span style="color:red">{$Think.lang.login_error}</span></p></div>
+					<div class="col-xs-12 col-md-9" id="login_freeze" style="display:none;"><p><span style="color:red">{$Think.lang.login_freeze}</span></p></div>
+					<div class="col-xs-12 col-md-10" style="text-align:center;"><button type="button" id="submit_button" onclick="submit()">{$Think.lang.login_submit}</button></div>
+					<div class="col-xs-12 col-md-6"><a href="https://open.weixin.qq.com/connect/qrconnect?appid={$wechat_appid}&redirect_uri=https%3a%2f%2fjobdemo.sprmint.cn%2findex.php%2findex%2finterfaces%2fwechat_login&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect">微信登录</a></div>
+					<div class="col-xs-12 col-md-6"><a href="https://www.facebook.com/dialog/oauth?client_id={$fb_appid}&redirect_uri=https%3a%2f%2fjobdemo.sprmint.cn%2findex.php%2findex%2finterfaces%2ffacebook_login">Facebook</a></div>
+					<div class="col-xs-12 col-md-6"><a href="/index.php/index/index/forget_pwd">忘记密码</a></div>
+
+				<div>
+			</div>
+		</div>
+		</div>
+		<hr/>
+		{include file="../application/index/view/public/footer.html" /}
+	</div>
+	
+	
+</div>
+<!--body end-->
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

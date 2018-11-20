@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var company_id="{$result.company_id}"
+		var user_name="{$result.user_name}";
+		var phone="{$result.phone}";
+		var company_name="{$result.company_name}";
+		var business="{$result.business}";
+		var introduction="{$result.introduction}";
+		var website="{$result.website}"; 
+		var apply_time="{$result.apply_time}";
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/company_verify_detail.js"></script>
+	<link rel="stylesheet" href="/static/css/mmcenter.css">
+    <title>{$Think.lang.admin_company_detail_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 register_main">
+	<div class="row" style="margin-top:70px;">
+		<div class="col-xs-1 col-md-1">
+		</div>
+		<div class="col-xs-10 col-md-9" style = "height:1400px;margin-top:10px;">
+				<div class="row">
+				<div><h4>{$Think.lang.admin_company_detail_title}</h4></div>
+				<hr/>
+				<div class="row">
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.admin_company_user_name} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="name" type="text" name="name" maxlength="40"/>
+								<span class="name" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_name_error}</span>
+							</p>
+						</div>
+						
+							
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.admin_company_phone} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="phone" type="text" name="phone" maxlength="12"/>
+								<span class="phone" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_phone_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_company_name} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="company_name" type="text" name="name" maxlength="40"/>
+								<span class="company_name" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_name_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_company_website} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="website" type="text" name="website" maxlength="4"/>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_company_business} : 
+							</p></div>
+						<div class="col-xs-12 col-md-9">
+							<textarea id="business" name="business"></textarea>
+						</div>
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_company_introduction} : 
+							<span style="font-size:small;">{$Think.lang.mmcenter_account_info_profile_maxlen}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><textarea id="introduction" type="textarea" name="introduction"></textarea>
+							<span class="introduction" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_profile_maxlen_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.admin_person_verify_detail_fail_reason} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><textarea id="fail_reason" type="textarea" name="fail_reason"></textarea>
+							<span class="fail_reason" style="color:red;display:none;">{$Think.lang.admin_person_verify_detail_fail_reason_error}</span>
+							</p>
+						</div>
+						
+						<div class="col-xs-4 col-md-4" style="text-align:right;"><button id="success">{$Think.lang.verify_success}</button></div>
+						<div class="col-xs-4 col-md-4" style="text-align:center;"><button id="fail">{$Think.lang.verify_fail}</button></div>
+						<div class="col-xs-4 col-md-4" style="text-align:left;"><button id="return">{$Think.lang.button_return}</button></div>
+				</div>
+	
+		</div>
+	</div>
+</div>
+<!--body end-->
+
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

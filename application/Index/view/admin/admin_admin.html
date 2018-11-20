@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/admin_admin.js"></script>
+    <title>{$Think.lang.admin_menu_admin_account_manager_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;height:800px;">
+			<div class="col-xs-12 col-md-12"><h3>{$Think.lang.admin_menu_admin_account_manager_title}<hr/></h3><button class="admin_add">添加</button></div>
+			<div class="col-xs-2 col-md-2"><p>{$Think.lang.admin_menu_admin_account_manager_id}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.admin_menu_admin_account_manager_name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.admin_menu_admin_account_manager_mobile}</p></div>
+			<div class="col-xs-4 col-md-6"><p>{$Think.lang.admin_menu_admin_account_manager_group}</p></div>
+			{foreach $result as $item}
+			<div class="col-xs-2 col-md-2"><p>{$item.email}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.mobile}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.admin_group}</p></div>
+			<div class="col-xs-4 col-md-1"><p><button class="admin_edt" value="{$item.user_id}">{$Think.lang.button_edit}</button></p></div>
+			<div class="col-xs-4 col-md-2"><p><button class="admin_edt_pwd" value="{$item.user_id}">{$Think.lang.button_edt_pwd}</button></p></div>
+			<div class="col-xs-4 col-md-1"><p><button class="admin_cold" value="{$item.user_id}">{$Think.lang.button_freeze}</button></p></div>
+			{/foreach}
+		</div>
+</div>
+<!--body end-->
+<!-- 编辑 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">编辑</h4>
+			</div>
+			<div class="modal-body">
+
+				<!-- <div class="form-group">
+					<label for="txt_user_id">管理员ID</label>
+					<input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="管理员ID">
+				</div> -->
+				<div class="form-group">
+					<label for="txt_user_name">名字</label>
+					<input id="name" type="text" name="txt_parentdepartment" class="form-control"  placeholder="名字">
+				</div>
+				<div class="form-group">
+					<label for="txt_mobile">手机</label>
+					<input id="mobile" type="text" name="txt_departmentlevel" class="form-control"  placeholder="手机">
+				</div>
+				<div class="form-group">
+					<label for="txt_admin_group">用户组</label>
+					<select class="form-control" id="group_choose">
+							{foreach $groups as $group}
+							<option value="{$group.group_id}">{$group.group_name}</option>
+							{/foreach}
+						
+					</select>				
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+				<button val="" type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ></span>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 编辑 -->
+
+<!-- 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="addModalLabel">编辑</h4>
+				</div>
+				<div class="modal-body">
+	
+					<div class="form-group">
+						<label for="txt_user_email">EMail</label><span class="add_admin_email" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+						<input id="add_admin_email"type="text" class="form-control" placeholder="Email">
+					</div>
+					<div class="form-group">
+							<label for="txt_user_name">密码</label><span class="add_password" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							<input id="add_password" type="password" name="txt_parentdepartment" class="form-control" placeholder="名字">
+					</div>
+					<div class="form-group">
+						<label for="txt_user_name">名字</label><span class="add_name" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+						<input id="add_name" type="text" name="txt_parentdepartment" class="form-control" placeholder="名字">
+					</div>
+					
+					<div class="form-group">
+						<label for="txt_mobile">手机</label>
+						<input id="add_mobile" type="text" name="txt_departmentlevel" class="form-control" placeholder="手机">
+					</div>
+					<div class="form-group">
+						<label for="txt_admin_group">用户组</label><span class="add_admin_group" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+						<select class="form-control" id="add_group_choose">
+								{foreach $groups as $group}
+								<option value="{$group.group_id}">{$group.group_name}</option>
+								{/foreach}
+							
+						</select>				
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+					<button val="" type="button" id="add_btn_submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ></span>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 新增 -->
+<!-- 冻结确认 -->  
+<div class="modal fade" id="delcfmModel" val="">  
+	<div class="modal-dialog">  
+	  <div class="modal-content message_align">  
+		<div class="modal-header">  
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+		  <h4 class="modal-title">提示信息</h4>  
+		</div>  
+		<div class="modal-body">  
+		  <p>您确认要冻结吗？</p>  
+		</div>  
+		<div class="modal-footer">  
+		   <input type="hidden" id="url"/>  
+		   <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		   <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>  
+		</div>  
+	  </div><!-- /.modal-content -->  
+	</div><!-- /.modal-dialog -->  
+ </div><!-- /.modal -->   
+<!-- 重置确认 -->
+<div class="modal fade" id="resetPwdModel" val="">  
+	<div class="modal-dialog">  
+	  <div class="modal-content message_align">  
+		<div class="modal-header">  
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+		  <h4 class="modal-title">提示信息</h4>  
+		</div>  
+		<div class="modal-body">  
+		  <p>您确认要重制密码为123456吗？</p>  
+		</div>  
+		<div class="modal-footer">  
+		   <input type="hidden" id="url"/>  
+		   <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		   <a  onclick="resetSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>  
+		</div>  
+	  </div><!-- /.modal-content -->  
+	</div><!-- /.modal-dialog -->  
+ </div><!-- /.modal -->   
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

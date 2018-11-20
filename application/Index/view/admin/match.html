@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/js/match.js"></script>
+    <title>{$Think.lang.admin_login_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+<div class="container margin-top-50 main_div">
+		<div class="row" style="margin-top:70px;height:800px;">
+			<div class="col-xs-12 col-md-12"><h3>{$Think.lang.admin_menu_job_employer_list}<hr/></h3></div>
+			<div class="col-xs-2 col-md-2"><p>{$Think.lang.no}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.mmcenter_account_info_name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$Think.lang.mmcenter_account_info_phone}</p></div>
+			<div class="col-xs-4 col-md-6"><p>{$Think.lang.employer_job_vacancy}</p></div>
+			{foreach $result as $item}
+			<div class="col-xs-2 col-md-2"><p>{$item.id}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.name}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.landline}</p></div>
+			<div class="col-xs-3 col-md-2"><p>{$item.job_vacancy}</p></div>
+			<div class="col-xs-4 col-md-2"><p><button class="next_match" value="{$item.id}">{$Think.lang.admin_match}</button></p></div>
+			{/foreach}
+		</div>
+
+</div>
+<!--body end-->
+
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

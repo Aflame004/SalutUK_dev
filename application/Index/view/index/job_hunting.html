@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		/*var verify={};
+		if(veryfy==-1)
+		{
+			alert("{$Think.lang.mmcenter_write_verify_first}");
+			window.location.href="/index.php/index/index/mmcenter/choose/2";
+		}*/
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/job_hunting.js"></script>
+	<link rel="stylesheet" href="/static/css/job_hunting.css">
+    <title>{$Think.lang.job_hunting_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header.html" /}
+<div class="container margin-top-50 register_main">
+	<div class="row" style="margin-top:70px;">
+		<!--<div class="col-xs-12 col-md-12" style="background-color:#CDC9C9;margin-top:-18px;">
+			<div class="row" style="text-align:center;">
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/1'"><div>{$Think.lang.mmcenter_menu1}</div></div>
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/2'"><div>{$Think.lang.mmcenter_menu2}</div></div>
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/3'"><div>{$Think.lang.mmcenter_menu3}</div></div>
+			</div>
+		</div>-->
+		<div class="col-xs-2 col-md-1">
+			
+		</div>
+		<div class="col-xs-9 col-md-9" style = "height:3000px;margin-top:10px;">
+
+				<div class="row">
+					<div class="col-xs-12 col-md-12"><h4>{$Think.lang.job_hunting_personal}</h4><hr/></div>
+					
+					<form action="/index.php/index/index/submit_job_hunting" enctype="multipart/form-data" method="post" onsubmit="return submit_check();">
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_first_name} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="first_name" type="text" name="first_name" onchange="check_first_name();"/>
+								<span class="first_name" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_surname} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="surname" type="text" name="surname" onchange="check_surname();"/>
+								<span class="surname" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_specify_job} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p>
+							<input type="checkbox" name="specify_job[]" value="any" >Any</input>
+							<input type="checkbox" name="specify_job[]" value="washplate" >Washplate</input>
+							<input type="checkbox" name="specify_job[]" value="kitchen_porter" >Kitchen porter</input>
+							<input type="checkbox" name="specify_job[]" value="cleaner" >Cleaner</input>
+							<input type="checkbox" name="specify_job[]" value="babysister" >Babysister</input>
+							<input type="checkbox" name="specify_job[]" value="customer_service" >Customer Service</input>
+							<input type="checkbox" name="specify_job[]" value="frier" >Frier</input>
+							<input type="checkbox" name="specify_job[]" value="cook" >Cook</input>
+							<input type="checkbox" name="specify_job[]" value="counter" >Counter</input>
+							<input type="checkbox" name="specify_job[]" value="fron_thouse_staff" >Front house staff</input>
+							<input type="checkbox" name="specify_job[]" value="driver" >Driver</input>
+							<input type="checkbox" name="specify_job[]" value="factory_worker" >Factory worker</input>
+							<input type="checkbox" name="specify_job[]" value="builder" >Builder</input>
+							<input type="checkbox" name="specify_job[]" value="others" >Others</input>
+							
+								<span class="specify_job" style="color:red;display:none;">{$Think.lang.job_hunting_error2}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_specify_job2} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="specify_job2" type="text" name="specify_job2" onchange=""/>
+								<span class="specify_job2" style="color:red;display:none;">{$Think.lang.job_hunting_error2}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_work_start_date} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input id="work_start_date" type="date" name="work_start_date"/>
+								<span class="work_start_date" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_city_want} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="city_want" type="text" name="city_want" onchange=""/>
+								<span class="city_want" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_right_uk} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="right_uk" name="right_uk">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+								<span class="right_uk" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_gender} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="hunting_gender" name="hunting_gender">
+								<option value="{$Think.lang.male}">{$Think.lang.male}</option>
+								<option value="{$Think.lang.female}">{$Think.lang.female}</option>
+								<option value="{$Think.lang.decline_to_state}">{$Think.lang.decline_to_state}</option>
+							</select>
+								<span class="hunting_gender" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_height} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="height" type="text" name="height" onchange=""/>
+								<span class="height" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_weight} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="weight" type="text" name="weight" onchange=""/>
+								<span class="weight" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_birthday} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input id="birthday" type="date" name="birthday" onchange=""/>
+								<span class="birthday" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_marital_status} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="marital_status" name="marital_status">
+								<option value="{$Think.lang.job_hunting_single}">{$Think.lang.job_hunting_single}</option>
+								<option value="{$Think.lang.job_huntint_married}">{$Think.lang.job_huntint_married}</option>
+								<option value="{$Think.lang.job_huntint_live_with_partner}">{$Think.lang.job_huntint_live_with_partner}</option>
+								<option value="{$Think.lang.decline_to_state}">{$Think.lang.decline_to_state}</option>
+							</select>
+								<span class="marital_status" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_street} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="street" type="text" name="street" onchange="check_street();"/>
+								<span class="street" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_street2} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="street2" type="text" name="street2" onchange=""/>
+								<span class="street2" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_city} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="city" type="text" name="city" onchange="check_city()"/>
+								<span class="city" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_State} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="state" type="text" name="state" onchange="check_state()"/>
+								<span class="state" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_postal} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="postal" type="text" name="postal" onchange="check_postal()"/>
+								<span class="postal" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_mobile_district} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="mobile_district" type="text" name="mobile_district" onchange="check_mobile_district()"/>
+								<span class="mobile_district" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_mobile} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="mobile" type="text" name="mobile" onchange="check_mobile()"/>
+								<span class="mobile" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_email} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="email" type="text" name="email" onchange=""/>
+								<span class="email" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_insurance_num} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="insurance_num" type="text" name="insurance_num" onchange=""/>
+								<span class="insurance_num" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_emergency_first_name} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="emergency_first_name" type="text" name="emergency_first_name" onchange="check_emergency_first_name()"/>
+								<span class="emergency_first_name" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_emergency_last_name} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="emergency_last_name" type="text" name="emergency_last_name" onchange="check_emergency_last_name()"/>
+								<span class="emergency_last_name" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_emergency_mobile} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="emergency_mobile" type="text" name="emergency_mobile" onchange="check_emergency_mobile()"/>
+								<span class="emergency_mobile" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_emergency_relationship} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="emergency_relationship" type="text" name="emergency_relationship" onchange="check_emergency_relationship()"/>
+								<span class="emergency_relationship" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-12"><h4>{$Think.lang.job_hunting_qualification}</h4><hr/></div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_education} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="education" name="education">
+								<option value="{$Think.lang.edu_None}">{$Think.lang.edu_None}</option>
+								<option value="{$Think.lang.edu_primary_school}">{$Think.lang.edu_primary_school}</option>
+								<option value="{$Think.lang.edu_secondary_school}">{$Think.lang.edu_secondary_school}</option>
+								<option value="{$Think.lang.edu_high_school}">{$Think.lang.edu_high_school}</option>
+								<option value="{$Think.lang.edu_diploma}">{$Think.lang.edu_diploma}</option>
+								<option value="{$Think.lang.edu_bachelor}">{$Think.lang.edu_bachelor}</option>
+								<option value="{$Think.lang.edu_master}">{$Think.lang.edu_master}</option>
+								<option value="{$Think.lang.edu_doctor}">{$Think.lang.edu_doctor}</option>
+							</select>
+								<span class="education" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-12"><h4>{$Think.lang.job_hunting_language}</h4><hr/></div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_multi_language} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<input type="checkbox" name="multi_language[]" value="Chinese" >Chinese</input>
+							<input type="checkbox" name="multi_language[]" value="English" >English</input>
+							<input type="checkbox" name="multi_language[]" value="Romanian" >Romanian</input>
+							<input type="checkbox" name="multi_language[]" value="Russian" >Russian</input>
+							<input type="checkbox" name="multi_language[]" value="French" >French</input>
+							<input type="checkbox" name="multi_language[]" value="Spainish" >Spainish</input>
+							<input type="checkbox" name="multi_language[]" value="Polish" >Polish</input>
+							<input type="checkbox" name="multi_language[]" value="Italian" >Italian</input>
+							<input type="checkbox" name="multi_language[]" value="others" >others</input>
+								<span class="multi_language" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_fluency_english} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="fluency_english" name="fluency_english">
+								<option value="n/a">n/a</option>
+								<option value="elementary">elementary</option>
+								<option value="limited_working">limited working</option>
+								<option value="minimum_professional">minimum_professional</option>
+								<option value="full_professional">full professional</option>
+								<option value="advanced">advanced</option>
+							</select>
+								<span class="fluency_english" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-12"><h4>{$Think.lang.job_hunting_experience}</h4><hr/></div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_driver_licences} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="driver_licences" name="driver_licences">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+								<span class="driver_licences" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_employment_history} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="employment_history" name="employment_history">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+								<span class="employment_history" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_work_skills} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="work_skills" type="text" name="work_skills" onchange="check_work_skills()"/>
+								<span class="work_skills" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_salary} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="salary" type="text" name="salary" onchange=""/>
+								<span class="salary" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-12"><h4>{$Think.lang.job_hunting_about_you}</h4><hr/></div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_criminal} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="criminal" name="criminal">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+								<span class="criminal" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_criminal_detail} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="criminal_detail" type="text" name="criminal_detail" onchange=""/>
+								<span class="criminal_detail" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_health} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="health" name="health">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+								<span class="health" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_health_detail} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input class="input_style" id="health_detail" type="text" name="health_detail" onchange=""/>
+								<span class="health_detail" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_where_know} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<select id="where_know" name="where_know">
+								<option value="Facebook">Facebook</option>
+								<option value="Google">Google</option>
+								<option value="Gumtree">Gumtree</option>
+								<option value="LinkedIn">LinkedIn</option>
+								<option value="Other_job_site">Other job site</option>
+								<option value="Other_social_media">Other social media</option>
+								<option value="Referral_by_a_friend">Referral by a friend</option>
+								<option value="twitter">twitter</option>
+								<option value="University_website">University website</option>
+								<option value="newspaper">newspaper</option>
+							</select>
+								<span class="where_know" style="color:red;display:none;">{$Think.lang.job_hunting_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p>{$Think.lang.job_hunting_upload_cv} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input id="upload_cv" type="file" name="upload_cv" onchange="check_cv()"/>
+								<span class="upload_cv" style="color:red;display:none;">{$Think.lang.job_hunting_cv_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<p><span>*</span>{$Think.lang.job_hunting_upload_id_photo} : </p>
+						</div>
+						<div class="col-xs-12 col-md-8">
+							<p><input id="id_photo" type="file" name="id_photo" onchange="check_id_photo()"/>
+								<span class="id_photo" style="color:red;display:none;">{$Think.lang.job_hunting_id_photo_error}</span>
+							</p>
+						</div>
+						
+						<div class="col-xs-11 col-md-9" style="text-align:center;"><input type="submit" value='{$Think.lang.button_submit}' /></div>
+					</form>
+				</div>
+	
+		</div>
+		{include file="../application/index/view/public/footer.html" /}
+	</div>
+</div>
+<!--body end-->
+
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

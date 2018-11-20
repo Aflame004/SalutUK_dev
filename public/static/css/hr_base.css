@@ -1,0 +1,23 @@
+.footer-back
+{
+	background-color:#969696;
+	height:150px;
+}
+
+.margin-top-20
+{
+	margin-top:20px;
+}
+
+.main_div
+{
+	background-color:#EBEBEB;
+}
+
+hr
+{
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	border: 0;
+	border-top: 1px solid #CDC9C9 !important;
+}

@@ -1,0 +1,50 @@
+.margin-top-70
+{
+	margin-top:70px;
+}
+.margin-top-50
+{
+	margin-top:50px;
+}
+
+.btn-div
+{
+	height:250px;
+	vertical-align: middle;
+}
+
+.btn
+{
+	width: 200px;
+    max-width: 100%;
+	background-color: #FF922C;
+    color: #ffffff;
+}
+
+.inner-vertical-middle
+{
+	margin-top:100px;
+}
+
+.faq-inner-vertical-middle
+{
+	margin-top:233px;
+}
+
+.btn-div-back1
+{
+	background:url(/static/pic/index/a1.jpg) no-repeat;
+	background-size:cover;
+}
+
+.btn-div-back2
+{
+	background:url(/static/pic/index/a2.jpg) no-repeat;
+	background-size:cover;
+}
+
+.faq-div-back
+{
+	background:url(/static/pic/index/a3.jpg) no-repeat;
+	background-size:cover;
+}

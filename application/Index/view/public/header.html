@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+<?php
+	use think\Controller;
+	use think\View;
+	use think\Lang;
+	use think\Session;
+	use think\Db;
+	use think\exception\PDOException;
+	use PHPMailer\PHPMailer;
+
+	$header_user_result=Db::query('select * from user where user_id=?',[Session::get('user_id')]);
+	if(!empty($header_user_result))
+	{
+		$header_user_email=$header_user_result[0]['email'];
+		$header_user_fb=$header_user_result[0]['fb_name'];
+		$header_user_wechat_name=$header_user_result[0]['wechat_name'];
+		$header_user_name=null;//最终显示的名字
+		if(!empty($header_user_email))
+		{
+			$header_user_name=$header_user_email;
+		}
+		else if(!empty($header_user_fb))
+		{
+			$header_user_name=$header_user_fb;
+		}
+		else if(!empty($header_user_wechat_name))
+		{
+			$header_user_name=$header_user_wechat_name;
+		}
+	}
+?>
+<!--nav start-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{$Think.lang.index_logo}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ol class="nav navbar-nav navbar-right">
+
+				{empty name="Think.session.user_id"}
+				    <li><a href="/index.php/index/index/login">{$Think.lang.header_login}</a></li>
+					<li><a href="/index.php/index/index/register">{$Think.lang.header_register}</a></li>
+				{else /}
+					<li><a>{$header_user_name}</a></li>
+					<li><a href="/index.php/index/index/mmcenter">{$Think.lang.header_my_center}</a></li>
+					<li><a href="/index.php/index/index/logout">{$Think.lang.header_logout}</a></li>
+				{/empty}
+				
+            </ol>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<!--nav end-->
+<!--body start-->

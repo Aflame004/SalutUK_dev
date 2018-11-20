@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var btn_tips='{$Think.lang.mmcenter_password_send_email_btn}';
+		var change_password_tips='{$Think.lang.mmcenter_password_password_changed}';
+		var verify={$verify};
+		var choose={$choose};
+		var is_activated={$is_activated};
+		var info_exist=false;
+		if(is_activated==0&&choose!=4)
+		{
+			alert("{$Think.lang.mmcenter_password_active_first}");
+			window.location.href="/index.php/index/index/mmcenter/choose/4";
+		}
+		if(verify==-1&&(choose==1||choose==3)&&is_activated==1)
+		{
+			alert("{$Think.lang.mmcenter_write_verify_first}");
+			window.location.href="/index.php/index/index/mmcenter/choose/2";
+		}
+	{if condition="!empty($result_2)"}
+		info_exist=true;
+		var status='{$result_2.verification_status}';
+		var user_name='{$result_2.user_name}';
+		var id_photo='{$result_2.id_photo}';
+		var phone='{$result_2.phone}';
+		var age='{$result_2.age}';
+		var profile='{$result_2.profile_info}';
+		var work_history='{$result_2.work_history}';
+	{else /}
+		info_exist=false;
+		var status='';
+		var user_name='';
+		var id_photo='';
+		var phone='';
+		var age='';
+		var profile='';
+		var work_history='';
+	{/if}
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/mmcenter.js"></script>
+	<link rel="stylesheet" href="/static/css/mmcenter.css">
+    <title>{$Think.lang.mmcenter_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header.html" /}
+<div class="container margin-top-50 register_main">
+	<div class="row" style="margin-top:70px;">
+		<div class="col-xs-12 col-md-12" style="background-color:#CDC9C9;margin-top:-18px;">
+			<div class="row" style="text-align:center;">
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/1'"><div>{$Think.lang.mmcenter_menu1}</div></div>
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/2'"><div>{$Think.lang.mmcenter_menu2}</div></div>
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/3'"><div>{$Think.lang.mmcenter_menu3}</div></div>
+				<div class="col-xs-3 col-md-2 menu" style="height:65px;" onclick="window.location.href='/index.php/index/index/mmcenter/choose/4'"><div>{$Think.lang.mmcenter_menu4}</div></div>
+			</div>
+		</div>
+		<div class="col-xs-1 col-md-1">
+			
+		</div>
+		<div class="col-xs-10 col-md-9" style = "height:900px;margin-top:10px;">
+			{if condition="$choose==1"}
+				<div class="row">
+					<div class="col-xs-12 col-md-12">
+						<p>{$Think.lang.mmcenter_applying_status} :
+							<span>
+								<?php
+									if($verify==0)
+										echo \think\Lang::get('mmcenter_applying');
+									else if($verify==1)
+										echo \think\Lang::get('mmcenter_applying_success');
+									else if($verify==2)
+										echo \think\Lang::get('mmcenter_applying_fail').$reason;
+								?>
+							</span>
+						</p>
+						<hr style="border-top: 1px solid #CDC9C9 "/>
+					</div>
+					
+					<div class="col-xs-12 col-md-12">{$Think.lang.mmcenter_current_hunting_job}</div>
+					<div class="col-xs-12 col-md-12"><hr/>
+					
+						<table>
+						  <tr>
+							<th>{$Think.lang.mmcenter_current_apply_date}</th>
+							<th>{$Think.lang.mmcenter_current_specify}</th>
+							<th>{$Think.lang.mmcenter_current_phone}</th>
+							<th>{$Think.lang.mmcenter_current_status}</th>
+							<th>{$Think.lang.mmcenter_current_operation}</th>
+						  </tr>
+					{foreach name="current_apply" item="vo"}
+						  <tr>
+							<td width="150">{$vo.apply_time}</td>
+							<td width="150">{$vo.specify}{$vo.specify2}</td>
+							<td width="150">{$vo.mobile_district}{$vo.mobile}</td>
+							<td width="150"><?php if($vo['status']==1)
+								echo \think\Lang::get('mmcenter_current_wait');
+								else if($vo['status']==2)
+								echo \think\Lang::get('mmcenter_current_matching');
+								else if($vo['status']==3)
+								echo \think\Lang::get('mmcenter_current_matching_completed');
+								else if($vo['status']==0)
+								echo \think\Lang::get('mmcenter_current_matching_closed');
+							?></td>
+							<td td width="150">
+							{if condition="$vo['status']==1"}
+								<button>取消</button>
+							{/if}
+							</td>
+						  </tr>
+					{/foreach}
+					</table>
+					<hr/>
+					</div><!--这里塞入当前申请-->
+					
+					<div class="col-xs-12 col-md-12">{$Think.lang.mmcenter_history_hunting_job}<hr/></div>
+					<div class="col-xs-12 col-md-12"></div> <!--这里塞入历史申请-->
+					
+				</div>
+			{elseif condition="$choose==2"/}
+				<div><h4>{$Think.lang.mmcenter_account_info_tile}</h4></div>
+				<hr/>
+				<div class="row">
+					<form action="/index.php/index/interfaces/update_user_info" enctype="multipart/form-data" method="post" onsubmit="return submit_check();">
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_id_photo} : </p>
+						</div>
+						
+						{if condition="empty($result_2) || $result_2.verification_status==2" //当审核失败，或未提交审核信息}
+						<div class="col-xs-12 col-md-9">
+							<p><input id="id_photo" type="file" name="id_photo" onchange="check_photo();"/>
+								<span class="id_photo" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_id_photo_error}</span>
+							</p>
+						</div>
+						{else /}
+						<div class="col-xs-12 col-md-9">
+							<p><img id="" src="\uploads\{$result_2.id_photo}" style="width:300px;"></img>
+							</p>
+							</p>
+						</div>
+						{/if}
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_name} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="name" type="text" name="name" onchange="check_name();" maxlength="40"/>
+								<span class="name" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_name_error}</span>
+							</p>
+						</div>
+						
+							
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_phone} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="phone" type="text" name="phone" onchange="check_phone();" maxlength="12"/>
+								<span class="phone" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_phone_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_age} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><select id="age" name="age"></select>
+								<span></span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_profile} : 
+							<span style="font-size:small;">{$Think.lang.mmcenter_account_info_profile_maxlen}</span>
+							</p></div>
+						<div class="col-xs-12 col-md-9">
+							<textarea id="profile" name="profile" onchange="check_charnum_profile();"></textarea>
+							<span class="profile" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_profile_maxlen_error}</span></p>
+						</div>
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_account_info_work_history} : 
+							<span style="font-size:small;">{$Think.lang.mmcenter_account_info_profile_maxlen}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><textarea id="work_history" type="textarea" name="work_history" onchange="check_charnum_work_history();"></textarea>
+							<span class="work_history" style="color:red;display:none;">{$Think.lang.mmcenter_account_info_profile_maxlen_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-11 col-md-9" style="text-align:center;"><input id="btn_personal_submit" type="submit" value='{$Think.lang.button_submit}' /></div>
+					</form>
+				</div>
+			{elseif condition="$choose==3"/}
+			<div class="row">
+			<button id="create_compay">{$Think.lang.mmcenter_create_company}</button>
+			<hr/>
+					<table>
+					<tr>
+						<th width="200">{$Think.lang.mmcenter_current_apply_date}</th>
+						<th width="200">{$Think.lang.mmcenter_company_name}</th>
+						<th width="200">{$Think.lang.mmcenter_current_status}</th>
+						<th width="200">{$Think.lang.mmcenter_current_operation}</th>
+					</tr>
+			{foreach name="company_info" item="vo"}
+
+						  <tr>
+							<td width="200">{$vo.apply_time}</td>
+							<td width="200">{$vo.company_name}</td>
+							<td width="200"><?php if($vo['status']==0)
+									echo \think\Lang::get('mmcenter_current_wait');
+								else if($vo['status']==1)
+									echo \think\Lang::get('mmcenter_current_pass');
+								else if($vo['status']==2)
+									echo \think\Lang::get('mmcenter_current_not_pass');
+							?></td>
+							<td>
+								<button class="del_company" value="{$vo.company_id}">{$Think.lang.button_delete}</button>
+							</td>
+						  </tr>
+					{/foreach}
+					</table>
+				</div>
+			{elseif condition="$choose==4"/}
+				
+				<div><h4>{$Think.lang.mmcenter_password_active_title}</h4></div>
+				<hr/>
+						<div class="col-xs-12 col-md-12">
+						{if condition="$is_activated==1"}
+							<p>
+								{$Think.lang.mmcenter_password_active}
+							</p>
+						</div>
+						{elseif condition="$is_activated==0" /}
+							<p>{$Think.lang.mmcenter_password_not_active}:&nbsp&nbsp<button id="btn_send_email">{$Think.lang.mmcenter_password_send_email_btn}</button><p>
+							
+						{/if}
+					<div><h4>{$Think.lang.mmcenter_password_change_title}</h4></div>
+					<hr/>
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_password_origin} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="origin_password" type="password" name="origin_password" maxlength="12"/>
+								<span class="origin_password" style="color:red;display:none;">{$Think.lang.mmcenter_password_origin}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_password_new_password} : 
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="new_password" type="password" name="new_password" maxlength="12"/>
+								<span class="new_password" style="color:red;display:none;">{$Think.lang.register_password_error}</span>
+							</p>
+						</div>
+						
+						
+						<div class="col-xs-12 col-md-3">
+							<p>{$Think.lang.mmcenter_password_new_password_again} : 
+							</p></div>
+						<div class="col-xs-12 col-md-9">
+							<p><input id="again_password" type="password" name="again_password" maxlength="12"/>
+								<span class="again_password" style="color:red;display:none;">{$Think.lang.register_password_again_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-12 col-md-9">
+							<p>
+								<span class="origin_password_error" style="color:red;display:none;">{$Think.lang.mmcenter_password_origin_error}</span>
+							</p>
+						</div>
+						<div class="col-xs-11 col-md-8" style="text-align:center;"><button id="btn_change_password">{$Think.lang.button_submit}</button></div>
+			{/if}
+		</div>
+		
+	</div>
+	{include file="../application/index/view/public/footer.html" /}
+</div>
+<!--body end-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="addModalLabel">添加</h4>
+				</div>
+				<div class="modal-body">
+	
+					<div class="form-group">
+						<label for="txt_user_email">{$Think.lang.mmcenter_company_name}</label>
+						<input id="add_company_name"type="text" class="form-control">
+					</div>
+					<div class="form-group">
+							<label for="txt_user_name">{$Think.lang.mmcenter_company_business}</label>
+							<input id="add_company_business" type="textarea" name="txt_parentdepartment" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="txt_user_name">{$Think.lang.mmcenter_company_introduction}</label>
+						<div><textarea id="add_company_introduction" name="introduction" onchange=""></textarea></div>
+					</div>
+					
+					<div class="form-group">
+						<label for="txt_mobile">{$Think.lang.mmcenter_company_website}</label>
+						<input id="add_company_website" type="text" name="txt_departmentlevel" class="form-control">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+					<button val="" type="button" id="add_company_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ></span>创建</button>
+				</div>
+			</div>
+		</div>
+</div>
+	<!-- 新增 -->
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

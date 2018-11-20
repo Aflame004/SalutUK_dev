@@ -1,0 +1,86 @@
+<?php
+	use think\Db;
+	use think\Session;
+	$admin_email=Session::get('admin_email');
+	$header_result=Db::query('select admin_group from user where email=?',[$admin_email]);
+	$admin_group=$header_result[0]['admin_group'];
+	$header_result=Db::query('select * from admin_group where group_id=?',[$admin_group]);
+	$auth_array=array();
+	$i=0;
+	foreach($header_result as $value)
+	{
+		$auth_array[$i++]=$value['auth_id'];
+	}
+	var_dump(array_search(1,$auth_array));
+?>
+
+<link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+<!--nav start-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{$Think.lang.index_logo}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ol class="nav navbar-nav navbar-right">
+
+				{empty name="Think.session.admin_email"}
+				    <li><a href="/index.php/index/admin/login">{$Think.lang.header_login}</a></li>
+				{else /}
+					<li><a>{$admin_email}</a></li>
+					{if condition="array_search(5,$auth_array)"}
+					<li><a href="/index.php/index/admin/news_list">{$Think.lang.header_news_modify}</a></li>
+					{/if}
+					{if condition="array_search(4,$auth_array)"}
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{$Think.lang.admin_menu_match} <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/index.php/index/admin/match">{$Think.lang.admin_menu_smatch}</a></li>
+							<li><a href="/index.php/index/admin/match_list">{$Think.lang.admin_menu_match_list}</a></li>
+						</ul>
+					</li>
+					{/if}
+					{if condition="array_search(7,$auth_array)"}
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{$Think.lang.admin_menu_info_verify} <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/index.php/index/admin/person_verify">{$Think.lang.admin_menu_person_verify}</a></li>
+							<li><a href="/index.php/index/admin/company_verify">{$Think.lang.admin_menu_company_verify}</a></li>
+						</ul>
+					</li>
+					{/if}
+					{if condition="array_search(1,$auth_array)==0"}
+					<li><a href="/index.php/index/admin/account">{$Think.lang.admin_menu_account}</a></li>
+					{/if}
+					{if condition="array_search(6,$auth_array)"}
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								{$Think.lang.admin_menu_admin_account} <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/index.php/index/admin/admin_admin">{$Think.lang.admin_menu_admin_account_manager}</a></li>
+							<li><a href="/index.php/index/admin/admin_admin_group">{$Think.lang.admin_menu_admin_account_group}</a></li>
+						</ul>
+					</li>
+					{/if}
+					<li><a href="/index.php/index/admin/modify_pwd">{$Think.lang.header_modify_pwd}</a></li>
+					<li><a href="/index.php/index/admin/logout">{$Think.lang.header_logout}</a></li>
+				{/empty}
+				
+            </ol>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<!--nav end-->
+<!--body start-->

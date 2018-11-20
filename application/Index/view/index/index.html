@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+    <title>{$Think.lang.index_title}</title>
+</head>
+<body>
+{include file="../application/index/view/public/header.html" /}
+<div class="container margin-top-50">
+	<div class="row">
+		<div class="col-xs-12 col-md-7">
+			<div>
+				<div class="btn-div row btn-div-back1">
+					<div class="col-xs-4 col-md-4">
+					</div>
+					<div class="col-xs-4 col-md-4">
+						<a href='/index.php/index/index/job_hunting/' class="btn btn-warning inner-vertical-middle">{$Think.lang.index_href1}</a>
+					</div>
+				</div>
+				<div class="btn-div row btn-div-back2">
+					<div class="col-xs-4 col-md-4">
+					</div>
+					<div class="col-xs-4 col-md-4">
+						<a href='/index.php/index/index/job_publishment/' class="btn btn-warning inner-vertical-middle">{$Think.lang.index_href2}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-5">
+			<div class="row faq-div-back"  style="height:500px;">
+					<div class="col-xs-4 col-md-4">
+					</div>
+					<div class="col-xs-4 col-md-4">
+						<a href='/index.php/index/index/news_list/' class="btn btn-warning faq-inner-vertical-middle">{$Think.lang.index_href3}</a>
+					</div>
+			</div>
+		</div>
+		{include file="../application/index/view/public/footer.html" /}
+	</div>
+</div>
+<!--body end-->
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

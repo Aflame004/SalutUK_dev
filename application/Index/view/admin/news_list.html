@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" href="/static/css/hr_base.css">
+	<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css"> -->
+    <!-- <script type="text/javascript" src="/static/js/match_list.js"></script> -->
+     <!--Basic Styles-->
+     <link href="/static/news/bootstrap.css" rel="stylesheet">
+     <link href="/static/news/font-awesome.css" rel="stylesheet">
+     <link href="/static/news/weather-icons.css" rel="stylesheet">
+ 
+     <!--Beyond styles-->
+     <link id="beyond-link" href="/static/news/beyond.css" rel="stylesheet" type="text/css">
+     <link href="/static/news/demo.css" rel="stylesheet">
+     <link href="/static/news/typicons.css" rel="stylesheet">
+     <link href="/static/news/animate.css" rel="stylesheet">
+    <title>{$Think.lang.admin_login_title}</title>
+    
+</head>
+<body>
+{include file="../application/index/view/public/header_admin.html" /}
+ <!-- Page Body -->
+ <div class="container margin-top-50">
+                    
+    <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('admin/news_add')}'"> <i class="fa fa-plus"></i> Add
+    </button>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-body">
+                    <div class="flip-scroll">
+                        <table class="table table-bordered table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">文章标题</th>
+                                     <th class="text-center">文章作者</th>
+                                      <th class="text-center">是否推荐</th>
+                                       <th class="text-center">关键字</th>
+                                      <th class="text-center">缩略图</th>                        
+                                        <th class="text-center">发布时间</th>
+                                         <th class="text-center">所属栏目</th>
+                                    <th class="text-center" width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name="list"  id="vo"}
+                              <tr>
+                                    <td align="center">{$vo.id}</td>
+                                    <td align="center">{$vo.title}</td>
+                                    <td align="center">{$vo.author}</td>
+                                    <td align="center">
+                                    {if condition="$vo['state'] eq 1"}
+                                    已推荐
+                                    {else /}
+                                    未推荐
+                                    {/if}
+                                </td>
+                                    <td align="center">{$vo.keywords}</td>
+                                    <td align="center">
+                                       {if condition="$vo['pic'] neq '' "}
+                                <img src="{$vo.pic}" height="50">
+                                    {else /}
+                                   暂无图片
+                                    {/if}</td>
+                                    <td align="center">{$vo.time|date="Y-m-d",###}</td>
+                                    <td align="center">{$vo.cate.catename}</td>
+                                    <td align="center">
+                                        <a href="{:url('admin/news_edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-add"></i> 编辑
+                                        </a>
+                                        <a href="{:url('admin/news_del',array('id'=>$vo['id']))}"
+                                            onClick="warning('确实要删除吗')" class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                               </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        {$list->render()}
+                                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+                    </div>
+                    <!-- /Page Body -->
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!--Basic Scripts-->
+   <script src="/static/news/jquery_002.js"></script>
+   <script src="/static/news/bootstrap.js"></script>
+   <script src="/static/news/jquery.js"></script>
+   <!--Beyond Scripts-->
+   <script src="/static/news/beyond.js"></script>
+   
+</body>
+</html>
